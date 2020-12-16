@@ -1,0 +1,44 @@
+
+<!-- loop over all todo items -->
+<ul class="list-group w-100" *ngFor="let todo of todos">
+
+    <!-- ngClass will be applied if the condition after the ":" is true -->
+    <!-- for instance, if (todo.isCompleted = true) { apply css class that is specified before ":" }  -->
+    <li class="list-group-item d-flex justify-content-between w-100" [ngClass]="{ completedTodo : todo.isComplete}">
+
+        <span>
+            <!-- only checked off if a todo isCompleted = true -->
+            <!-- allows user to check and uncheck items -->
+            <input 
+            (change)="changeTodoStatus(todo)"
+            type="checkbox" 
+            [checked]="todo.isComplete" />
+        </span>
+
+        <!-- title -->
+        
+        <span>
+            {{ todo.title | uppercase }}
+        </span>
+
+        <span>
+            {{ todo.description }}
+        </span>
+
+        <!-- date -->
+        <span >
+            {{ todo.date | date }}
+        </span>
+
+        <!-- trash icon -->
+        <span>
+            
+            <!-- click to delete entire todo object, pass in todo to delete -->
+            <button class="btn btn-danger" (click)="deleteTodo(todo)">
+                <fa-icon [icon]="faTrashAlt"></fa-icon>
+                Delete
+            </button>
+        </span>
+
+    </li>
+</ul>
